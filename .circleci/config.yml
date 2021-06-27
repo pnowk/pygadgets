@@ -24,7 +24,8 @@ jobs:
             python setup.py sdist bdist_wheel
             sudo pip install pipenv
             pipenv install twine
-            pipenv run twine upload --repository testpypi dist/*
+            echo "uploading to testpypi"
+          # pipenv run twine upload --repository testpypi dist/*
   pypi_publish:
     docker:
       - image: circleci/python:3.8.0
@@ -35,7 +36,8 @@ jobs:
             python setup.py sdist bdist_wheel
             sudo pip install pipenv
             pipenv install twine
-            pipenv run twine upload dist/*
+            echo "uploading to pypi"
+          # pipenv run twine upload dist/*
 workflows:
   build_test_publish:
     jobs:
