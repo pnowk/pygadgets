@@ -1,6 +1,6 @@
-from ditch import foo_maker
+from posterity import foo_maker
 
-import ditch.problems.boyorgirl as t1
+import posterity.problems.boyorgirl as t1
 
 def test_foo_maker():
     assert foo_maker() == 'foo'

@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 
 VERSION = '0.0.1'
-DESCRIPTION = 'programming resources'
-LONG_DESCRIPTION = 'package to maintain my programming resources'
+DESCRIPTION = 'programming resources and utils'
+LONG_DESCRIPTION = 'package to maintain my programming resources and utilities'
 
 setup(
-    name="ditch",
+    name="posterity",
     version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
