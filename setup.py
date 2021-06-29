@@ -5,7 +5,7 @@ DESCRIPTION = 'programming resources and utils'
 LONG_DESCRIPTION = 'package to maintain my programming resources and utilities'
 
 setup(
-    name="posterity",
+    name="posterity-box",
     version=VERSION,
     description=DESCRIPTION,
     long_description=LONG_DESCRIPTION,
