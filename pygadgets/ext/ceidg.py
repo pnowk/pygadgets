@@ -1,4 +1,5 @@
 import requests
+from requests.adapters import HTTPAdapter
 from pygadgets import config
 
 
@@ -9,5 +10,8 @@ headers = {"Authorization": "Bearer " + config.PYGADGETS_CEIDG_API_TOKEN}
 
 def get_companies():
     session = requests.Session()
+    url = BASEURL + '/firmy'
+
     session.headers.update(headers)
-    return session.get(BASEURL + "/firmy").json()
+    session.mount(prefix=BASEURL, adapter=HTTPAdapter(max_retries=5))
+    return session.get(url).json()
