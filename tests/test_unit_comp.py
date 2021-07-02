@@ -1,10 +1,5 @@
-from posterity import foo_maker
 
-import posterity.problems.boyorgirl as t1
-
-def test_foo_maker():
-    assert foo_maker() == 'foo'
-
+import gadget.comp.boyorgirl as t1
 
 def test_1(capsys):
     input_values = ['xiaodao']
