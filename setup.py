@@ -13,7 +13,9 @@ setup(
     author_email="pnowk123@gmail.com",
     license='MIT',
     packages=find_packages(),
-    install_requires=[],
+    install_requires=[
+        'twine', 'python-dotenv', 'wheel'
+    ],
     keywords='python',
     classifiers= [
         "Development Status :: 3 - Alpha",
