@@ -10,7 +10,7 @@ headers = {"Authorization": "Bearer " + config.PYGADGETS_CEIDG_API_TOKEN}
 
 def get_companies():
     session = requests.Session()
-    url = BASEURL + '/firmy'
+    url = BASEURL + "/firmy"
 
     session.headers.update(headers)
     session.mount(prefix=BASEURL, adapter=HTTPAdapter(max_retries=3))

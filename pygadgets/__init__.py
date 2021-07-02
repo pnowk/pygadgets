@@ -28,6 +28,6 @@ except OSError:
 
 
 if env == {}:
-    raise RuntimeError('Unable to collect configuration vars')
+    raise RuntimeError("Unable to collect configuration vars")
 
 config = type("Config", (), env)
