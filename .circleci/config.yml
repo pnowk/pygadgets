@@ -8,8 +8,7 @@ jobs:
       - run:
           command: |  # create whl and use pipenv to install dependencies
             python setup.py sdist bdist_wheel
-            pip install -e .
-            python -m pytest -v -s ./tests
+            sudo pip install -e .
           # sudo pip install pipenv
           # pipenv install dist/pygadgets-0.0.3-py3-none-any.whl
           # pipenv install pytest
