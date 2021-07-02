@@ -15,7 +15,8 @@ jobs:
           # pipenv install pytest
       - run:
           command: |  # Run test suite
-            pipenv run pytest
+            python -m pytest -v -s ./tests
+          # pipenv run pytest
   test_pypi_publish:
     docker:
       - image: circleci/python:3.8.0
