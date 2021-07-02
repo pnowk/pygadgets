@@ -59,11 +59,10 @@ def main():
         # 4 5 6 9 -> NO -> 6 does not advance
         best = sorted(skills, reverse=True)[:2]
         if (set(p1) == set(best)) or (set(p2) == set(best)):
-            print('NO')
+            print("NO")
         else:
             print("YES")
 
+
 if __name__ == "__main__":
     main()
-
-

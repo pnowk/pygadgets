@@ -61,8 +61,6 @@ def main():
     else:
         print("IGNORE HIM!")
 
+
 if __name__ == "__main__":
     main()
-
-
-

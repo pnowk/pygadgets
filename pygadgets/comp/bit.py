@@ -13,7 +13,7 @@
 # The language is that peculiar as it has exactly one variable, called x. Also, there are two operations:
 
 #     Operation ++ increases the value of variable x by 1.
-#     Operation -- decreases the value of variable x by 1. 
+#     Operation -- decreases the value of variable x by 1.
 
 # A statement in language Bit++ is a sequence, consisting of exactly one operation and one variable x. The statement is written without spaces, that is, it can only contain characters "+", "-", "X". Executing a statement means applying the operation it contains.
 
@@ -59,9 +59,9 @@ def main():
     for _ in range(n):
         expr = str(input())
 
-        if '++' in expr:
+        if "++" in expr:
             X += 1
-        elif '--' in expr:
+        elif "--" in expr:
             X -= 1
 
     print(X)
