@@ -1,5 +1,5 @@
 
-import pygadget.comp.boyorgirl as t1
+import pygadgets.comp.boyorgirl as t1
 
 def test_1(capsys):
     input_values = ['xiaodao']
