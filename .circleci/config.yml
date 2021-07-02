@@ -23,6 +23,7 @@ jobs:
       - checkout  # checkout source code to working directory
       - run:
           command: |  # create whl, install twine and publish to Test PyPI
+            sudo pip install -r requirements.txt
             python setup.py sdist bdist_wheel
             twine upload --repository testpypi dist/*
           # sudo pip install pipenv
@@ -35,6 +36,7 @@ jobs:
       - checkout  # checkout source code to working directory
       - run:
           command: |  # create whl, install twine and publish to PyPI
+            sudo pip install -r requirements.txt
             python setup.py sdist bdist_wheel
             twine upload dist/*
           # sudo pip install pipenv
