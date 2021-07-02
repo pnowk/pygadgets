@@ -8,9 +8,11 @@ jobs:
       - run:
           command: |  # create whl and use pipenv to install dependencies
             python setup.py sdist bdist_wheel
-            sudo pip install pipenv
-            pipenv install dist/pygadgets-0.0.3-py3-none-any.whl
-            pipenv install pytest
+            pip install -e .
+            python -m pytest -v -s ./tests
+          # sudo pip install pipenv
+          # pipenv install dist/pygadgets-0.0.3-py3-none-any.whl
+          # pipenv install pytest
       - run:
           command: |  # Run test suite
             pipenv run pytest
@@ -22,9 +24,10 @@ jobs:
       - run:
           command: |  # create whl, install twine and publish to Test PyPI
             python setup.py sdist bdist_wheel
-            sudo pip install pipenv
-            pipenv install twine
-            pipenv run twine upload --repository testpypi dist/*
+            twine upload --repository testpypi dist/*
+          # sudo pip install pipenv
+          # pipenv install twine
+          # pipenv run twine upload --repository testpypi dist/*
   pypi_publish:
     docker:
       - image: circleci/python:3.8.0
@@ -33,9 +36,10 @@ jobs:
       - run:
           command: |  # create whl, install twine and publish to PyPI
             python setup.py sdist bdist_wheel
-            sudo pip install pipenv
-            pipenv install twine
-            pipenv run twine upload dist/*
+            twine upload dist/*
+          # sudo pip install pipenv
+          # pipenv install twine
+          # pipenv run twine upload dist/*
 workflows:
   build_test_publish:
     jobs:
