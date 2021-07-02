@@ -3,3 +3,4 @@ wheel
 python-dotenv
 black
 bumpversion
+pytest

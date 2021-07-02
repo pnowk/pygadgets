@@ -14,7 +14,7 @@ setup(
     license='MIT',
     packages=find_packages(),
     install_requires=[
-        'twine', 'python-dotenv', 'wheel', 'black', 'bumpversion'
+        'twine', 'python-dotenv', 'wheel', 'black', 'bumpversion', 'pytest'
     ],
     keywords='python',
     classifiers= [
