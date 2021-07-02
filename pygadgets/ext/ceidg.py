@@ -13,5 +13,5 @@ def get_companies():
     url = BASEURL + '/firmy'
 
     session.headers.update(headers)
-    session.mount(prefix=BASEURL, adapter=HTTPAdapter(max_retries=5))
+    session.mount(prefix=BASEURL, adapter=HTTPAdapter(max_retries=3))
     return session.get(url).json()
