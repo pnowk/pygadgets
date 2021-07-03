@@ -9,6 +9,7 @@ logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
 LOCAL_DIR = join(Path.home(), ".pygadget")
 
+
 def try_make_dirs(directory):
     try:
         makedirs(directory)
@@ -19,8 +20,9 @@ def try_make_dirs(directory):
     else:
         LOG.info(".pygadget dir created")
 
+
 try_make_dirs(LOCAL_DIR)
-try_make_dirs(join(LOCAL_DIR, 'data'))
+try_make_dirs(join(LOCAL_DIR, "data"))
 
 try:
     env = dotenv_values(stream=StringIO(open(join(LOCAL_DIR, ".env"), "r").read()))

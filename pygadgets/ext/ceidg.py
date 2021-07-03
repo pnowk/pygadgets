@@ -3,6 +3,7 @@ from requests.adapters import HTTPAdapter
 from pygadgets import config
 from dataclasses import dataclass
 import logging
+import time
 
 
 BASEURL = "https://dane.biznes.gov.pl/api/ceidg/v1"
@@ -13,6 +14,10 @@ log = logging.getLogger(__name__)
 
 _session = None
 MAX_RETRIES = 3
+
+
+class RequestError(Exception):
+    pass
 
 
 @dataclass
@@ -26,6 +31,7 @@ class Company:
 
 def get_session():
     global _session
+
     if _session is not None:
         log.debug("using cached session")
         return _session
@@ -38,16 +44,22 @@ def get_session():
 
 
 def make_request(query):
-    return get_session().get(query).json()
+    time.sleep(0.1)
+    log.info(f"making request: {query}")
+    res = get_session().get(query).json()
+    if res["http_status_code"] == 200:
+        return res
+    else:
+        raise RequestError(f"unable to make a request {str(res)}")
 
 
-def get_first_page():
-    url = BASEURL + "/firmy?limit=50"
+def get_page(num_page=1):
+    url = BASEURL + f"/firmy?limit=50&page={num_page}".format(str(num_page))
     return make_request(url)
 
 
-def expand_company(co):
-    co.details = make_request(co.url)
+def expand_details(co):
+    co.details = make_request(co.url)["firma"]
     return co
 
 
@@ -56,14 +68,14 @@ def prepare(raw_page, expand=False):
     for co in raw_page:
         c = Company(co["nazwa"], co["adresDzialanosci"], co["status"], co["link"], None)
         if expand:
-            c = expand_company(c)
+            c = expand_details(c)
         companies.append(c)
     return companies
 
 
-def iter_pages(numpages=None, expand=True):
+def iter_pages(numpages=None, expand=False, start_page=1):
     pagecount = 0
-    page = get_first_page()
+    page = get_page(start_page)
     while True:
         try:
             log.info(f"getting page {pagecount}")
@@ -71,7 +83,6 @@ def iter_pages(numpages=None, expand=True):
             yield prepared
             next_link = page["links"]["next"]
             log.debug(f"next link {next_link}")
-            print(next_link)
             page = make_request(next_link)
         except Exception as e:
             log.info(f"cannot get next page. ending. {str(e)}")
