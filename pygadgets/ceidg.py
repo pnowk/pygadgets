@@ -1,6 +1,6 @@
 import requests
 from requests.adapters import HTTPAdapter
-from pygadgets import config
+from . import config
 from dataclasses import dataclass
 import logging
 import time

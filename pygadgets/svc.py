@@ -1,7 +1,7 @@
 from os import stat
 from os import listdir, remove
 from . import LOCAL_DIR, join, Path
-from .ext.ceidg import iter_pages
+from .ceidg import iter_pages
 from .util import lazyproperty
 import pickle
 import logging

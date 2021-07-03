@@ -1,4 +1,4 @@
-from pygadgets.ext.ceidg import get_page, iter_pages
+from pygadgets.ceidg import get_page, iter_pages
 import pytest
 
 
