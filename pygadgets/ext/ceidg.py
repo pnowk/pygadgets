@@ -46,9 +46,9 @@ def get_session():
 def make_request(query):
     time.sleep(0.1)
     log.info(f"making request: {query}")
-    res = get_session().get(query).json()
-    if res["http_status_code"] == 200:
-        return res
+    res = get_session().get(query)
+    if res.status_code == 200:
+        return res.json()
     else:
         raise RequestError(f"unable to make a request {str(res)}")
 
