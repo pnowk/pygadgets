@@ -9,11 +9,12 @@ import logging
 log = logging.getLogger(__name__)
 
 
-def _dump_pages(numpages=None):
+def _dump_pages(numpages=None, expand=False):
     log.info("dumping companies")
-    pages = iter_pages(numpages, expand=True)
+    pages = iter_pages(numpages, expand=expand)
+    expanded_suff = '_expanded' if expand else ''
     for ix, page in enumerate(pages):
-        with open(join(LOCAL_DIR, "data", "co_page_" + str(ix) + ".pkl"), "wb") as f:
+        with open(join(LOCAL_DIR, "data", "co_page_" + str(ix) + expanded_suff + ".pkl"), "wb") as f:
             log.info(f"dumping page {ix} of length {len(page)}")
             pickle.dump(page, f)
 
@@ -36,12 +37,12 @@ class CeidgService:
                 _pages.append(records)
         return _pages
 
-    def prepare_dump(self, numpages=None, clear=False):
+    def prepare_dump(self, numpages=None, expand=False, clear=False):
         for f in self.datafiles:
             if clear:
                 log.info(f"removing {f}")
                 remove(f)
-        _dump_pages(numpages)
+        _dump_pages(numpages, expand)
 
     def list_companies(self):
         return [co for page in self.pages for co in page]

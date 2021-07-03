@@ -10,9 +10,11 @@ if __name__ == "__main__":
         args = sys.argv[1:]
         if "--dump" in args:
             numpages = None
+            expand = '--expand' in args
+            clear='--clear' in args
             if "--num" in args:
                 numpages = int(args[2])
-            cei.prepare_dump(numpages, clear=False)
+            cei.prepare_dump(numpages, expand=expand, clear=clear)
     except KeyboardInterrupt:
         log.info("interrupted by the user. exiting.")
         sys.exit(1)

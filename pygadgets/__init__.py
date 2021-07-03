@@ -7,7 +7,7 @@ from io import StringIO
 
 logging.basicConfig(level=logging.INFO)
 LOG = logging.getLogger(__name__)
-LOCAL_DIR = join(Path.home(), ".pygadget")
+LOCAL_DIR = join(Path.home(), ".pygadgets")
 
 
 def try_make_dirs(directory):
