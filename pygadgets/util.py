@@ -1,7 +1,7 @@
 import logging
-from types import ClassMethodDescriptorType
 import requests
 from requests.adapters import HTTPAdapter
+from requests.auth import HTTPBasicAuth
 
 
 log = logging.getLogger(__name__)
@@ -15,14 +15,17 @@ class SessionHandler:
     _cache = {}
 
     @classmethod
-    def get_session(cls, prefix, headers, retries=1):
+    def get_session(cls, prefix, headers=None, retries=1, auth=None):
         if prefix in cls._cache:
             log.debug(f"using cached session for {prefix}")
             return cls._cache[prefix]
         else:
             log.debug(f"creating new session for {prefix}")
             session = requests.Session()
-            session.headers.update(headers)
+            if auth:
+                session.auth = auth
+            if headers:
+                session.headers.update(headers)
             session.mount(prefix=prefix, adapter=HTTPAdapter(max_retries=retries))
             cls._cache[prefix] = session
             return session
@@ -32,7 +35,7 @@ class SessionHandler:
         log.info(f"making request: {url}")
         res = session.get(url)
         if res.status_code == 200:
-            return res.json()
+            return res
         else:
             raise RequestError(f"unable to make a request {str(res)}")
 

@@ -22,6 +22,7 @@ def try_make_dirs(directory):
 
 
 try_make_dirs(join(LOCAL_DIR, "data"))
+try_make_dirs(join(LOCAL_DIR, "log"))
 
 try:
     env = dotenv_values(stream=StringIO(open(join(LOCAL_DIR, ".env"), "r").read()))

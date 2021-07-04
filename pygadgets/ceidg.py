@@ -23,7 +23,7 @@ def _session():
 
 
 def make_request(url):
-    return handler.make_request(_session(), url)
+    return handler.make_request(_session(), url).json()
 
 
 def get_page(num_page=1):
