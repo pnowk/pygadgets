@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-VERSION = '0.1.1'
+VERSION = '0.1.2'
 DESCRIPTION = 'programming resources and utils'
 LONG_DESCRIPTION = 'package to maintain my programming resources and utilities'
 
