@@ -10,11 +10,13 @@ if __name__ == "__main__":
         args = sys.argv[1:]
         if "--dump" in args:
             numpages = None
-            expand = '--expand' in args
-            clear='--clear' in args
+            expand = "--expand" in args
+            clear = "--clear" in args
             if "--num" in args:
-                numpages = int(args[2])
+                num_page_val_idx = args.index("--num") + 1
+                numpages = int(args[num_page_val_idx])
             cei.prepare_dump(numpages, expand=expand, clear=clear)
     except KeyboardInterrupt:
         log.info("interrupted by the user. exiting.")
-        sys.exit(1)
+    except IndexError as e:
+        log.info(f"cannot handle input args. {str(e)}")

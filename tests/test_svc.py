@@ -1,5 +1,4 @@
 import pytest
-
 from pygadgets.svc import CeidgService
 
 

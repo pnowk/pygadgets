@@ -5,7 +5,7 @@ import logging
 from dotenv import dotenv_values, load_dotenv
 from io import StringIO
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger(__name__)
 LOCAL_DIR = join(Path.home(), ".pygadgets")
 
@@ -21,7 +21,6 @@ def try_make_dirs(directory):
         LOG.info(".pygadget dir created")
 
 
-try_make_dirs(LOCAL_DIR)
 try_make_dirs(join(LOCAL_DIR, "data"))
 
 try:

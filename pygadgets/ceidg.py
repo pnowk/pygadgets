@@ -1,23 +1,11 @@
-import requests
-from requests.adapters import HTTPAdapter
+from .util import SessionHandler as handler
 from . import config
 from dataclasses import dataclass
 import logging
-import time
 
-
-BASEURL = "https://dane.biznes.gov.pl/api/ceidg/v1"
-
-headers = {"Authorization": "Bearer " + config.PYGADGETS_CEIDG_API_TOKEN}
 
 log = logging.getLogger(__name__)
-
-_session = None
-MAX_RETRIES = 3
-
-
-class RequestError(Exception):
-    pass
+BASEURL = "https://dane.biznes.gov.pl/api/ceidg/v1"
 
 
 @dataclass
@@ -29,28 +17,13 @@ class Company:
     details: dict
 
 
-def get_session():
-    global _session
-
-    if _session is not None:
-        log.debug("using cached session")
-        return _session
-
-    session = requests.Session()
-    session.headers.update(headers)
-    session.mount(prefix=BASEURL, adapter=HTTPAdapter(max_retries=MAX_RETRIES))
-    _session = session
-    return session
+def _session():
+    headers = {"Authorization": "Bearer " + config.PYGADGETS_CEIDG_API_TOKEN}
+    return handler.get_session(BASEURL, headers, retries=1)
 
 
-def make_request(query):
-    time.sleep(0.1)
-    log.info(f"making request: {query}")
-    res = get_session().get(query)
-    if res.status_code == 200:
-        return res.json()
-    else:
-        raise RequestError(f"unable to make a request {str(res)}")
+def make_request(url):
+    return handler.make_request(_session(), url)
 
 
 def get_page(num_page=1):

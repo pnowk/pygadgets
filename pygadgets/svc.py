@@ -7,14 +7,20 @@ import pickle
 import logging
 
 log = logging.getLogger(__name__)
+PAGE_SUFF = "_page_"
 
 
 def _dump_pages(numpages=None, expand=False):
     log.info("dumping companies")
     pages = iter_pages(numpages, expand=expand)
-    expanded_suff = '_expanded' if expand else ''
+    expanded_suff = "_expanded" if expand else ""
     for ix, page in enumerate(pages):
-        with open(join(LOCAL_DIR, "data", "co_page_" + str(ix) + expanded_suff + ".pkl"), "wb") as f:
+        with open(
+            join(
+                LOCAL_DIR, "data", "co" + PAGE_SUFF + str(ix) + expanded_suff + ".pkl"
+            ),
+            "wb",
+        ) as f:
             log.info(f"dumping page {ix} of length {len(page)}")
             pickle.dump(page, f)
 
@@ -25,7 +31,7 @@ class CeidgService:
         return [
             join(LOCAL_DIR, "data", f)
             for f in listdir(str(LOCAL_DIR) + "/data")
-            if "_page_" in f
+            if PAGE_SUFF in f
         ]
 
     @lazyproperty
